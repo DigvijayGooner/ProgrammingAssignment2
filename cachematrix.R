@@ -1,3 +1,4 @@
+#Creating a function to return the Required functions for the cacheSolve function
 makeCacheMatrix <- function(x = matrix()) {
         inverse <- NULL
  
@@ -19,12 +20,13 @@ makeCacheMatrix <- function(x = matrix()) {
 ## If not, it calculates it's inverse and caches it
  
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x' 
- 
-        if(is.null(x$getI())){
-                print("Not cached. Recomputing...") 
-                x$setI(solve(x$get()))
-        }else {print("Found in cache")}
- 
-        x$getI()
+    inv <- x$getinverse()
+    if(!is.null(inv)) {
+        message("getting cached data.")
+        return(inv)
+    }
+    data <- x$get()
+    inv <- solve(data)
+    x$setinverse(inv)
+    inv
 }
